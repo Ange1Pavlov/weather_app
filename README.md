@@ -2,6 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+API URI: https://api.openweathermap.org/data/2.5/weather?lat=42.697708&lon=23.321867&appid=fc151e957b21da1a5746a3e36303b51a
+API URI FOR 5 DAYS: https://api.openweathermap.org/data/2.5/forecast?lat=42.697708&lon=23.321867&appid=fc151e957b21da1a5746a3e36303b51a
+
 First, run the development server:
 
 ```bash
