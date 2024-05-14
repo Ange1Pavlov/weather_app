@@ -1,27 +1,40 @@
 {
-  "coord": { "lon": 23.3219, "lat": 42.6977 },
+  "coord": {
+      "lon": 23.3242,
+      "lat": 42.6975
+  },
   "weather": [
-    { "id": 801, "main": "Clouds", "description": "few clouds", "icon": "02d" }
+      {
+          "id": 801,
+          "main": "Clouds",
+          "description": "few clouds",
+          "icon": "02n"
+      }
   ],
   "base": "stations",
   "main": {
-    "temp": 288.97,
-    "feels_like": 288.04,
-    "temp_min": 288.16,
-    "temp_max": 288.97,
-    "pressure": 1017,
-    "humidity": 55
+      "temp": 282.98,
+      "feels_like": 280.47,
+      "temp_min": 282.98,
+      "temp_max": 282.98,
+      "pressure": 1017,
+      "humidity": 87
   },
   "visibility": 10000,
-  "wind": { "speed": 3.6, "deg": 40 },
-  "clouds": { "all": 14 },
-  "dt": 1715620177,
+  "wind": {
+      "speed": 5.14,
+      "deg": 100
+  },
+  "clouds": {
+      "all": 20
+  },
+  "dt": 1715633868,
   "sys": {
-    "type": 1,
-    "id": 6366,
-    "country": "BG",
-    "sunrise": 1715569576,
-    "sunset": 1715621999
+      "type": 1,
+      "id": 6366,
+      "country": "BG",
+      "sunrise": 1715569576,
+      "sunset": 1715621998
   },
   "timezone": 10800,
   "id": 727011,

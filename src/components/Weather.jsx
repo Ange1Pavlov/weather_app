@@ -1,71 +1,40 @@
-'use client';
-import { useState, useEffect } from 'react';
-import weatherData from '../data/weather.json';
-import ConvertDegrees from './ConvertDegrees';
-import ConvertDistance from './ConvertDistance';
-import ConvertTime from './ConvertTime';
-import CapitalizeText from './CapitalizeText';
+import {
+  convertTime,
+  convertDegrees,
+  convertDistance,
+  capitalizeText,
+} from './Convert';
+import Image from 'next/image';
 import Loader from './Loader';
-import axios from 'axios';
 
-const Weather = () => {
-  const [data, setData] = useState(null);
+const Weather = ({ data }) => {
   const currentTime = new Date();
 
-  const getWeatherData = async () => {
-    try {
-      // const res = await axios.get(
-      //   'https://api.openweathermap.org/data/2.5/weather',
-      //   {
-      //     params: {
-      //       lat: '42.697708',
-      //       lon: '23.321867',
-      //       appid: 'fc151e957b21da1a5746a3e36303b51a',
-      //     },
-      //   }
-      // );
-      // return res.data;
-      return weatherData;
-    } catch (err) {
-      console.log(err);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const resData = await getWeatherData();
-      console.log(resData);
-      setData(resData);
-    };
-
-    fetchData();
-  }, []);
-
-  return data ? (
+  return (
     <>
-    <small>{<ConvertTime time={currentTime} newFormat='dd MMMM yyyy, HH:mm' />}</small>
+      <small>{convertTime(currentTime, 'dd MMMM yyyy, HH:mm')}</small>
       <h1 style={{ fontSize: '1.5rem' }}>
         {data.name}, {data.sys.country}
       </h1>
+      <Image
+        src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`}
+        width={100}
+        height={100}
+        alt={data.weather[0].description}
+      />
       <h2 style={{ fontSize: '2.5rem', fontWeight: 700 }}>
-        <ConvertDegrees kelvin={data.main.temp} />
+        {convertDegrees(data.main.temp)}&deg;C
       </h2>
-
       <strong>
-        Feels like <ConvertDegrees kelvin={data.main.feels_like} />.{' '}
-        <CapitalizeText text={data.weather[0].description} />. Visibility: ~{' '}
-        <ConvertDistance meters={data.visibility} />
+        Feels like {convertDegrees(data.main.feels_like)}&deg;C.{' '}
+        {capitalizeText(data.weather[0].description)}. Visibility: ~{' '}
+        {convertDistance(data.visibility)}
       </strong>
       <br />
       <br />
       <small>
-        <div>
-          Min: <ConvertDegrees kelvin={data.main.temp_min} />
-        </div>
-        <div>
-          Max: <ConvertDegrees kelvin={data.main.temp_max} />
-        </div>
+        <div>Min: {convertDegrees(data.main.temp_min)}&deg;C</div>
+        <div>Max: {convertDegrees(data.main.temp_max)}&deg;C</div>
 
         <div>Clouds: {data.clouds.all} %</div>
         {data.rain && (
@@ -79,16 +48,10 @@ const Weather = () => {
         <div>Wind Speed: {data.wind.speed}m/s</div>
         <br />
 
-        <div>
-          Sunrise: <ConvertTime time={data.sys.sunrise * 1000} newFormat='HH:mm' />
-        </div>
-        <div>
-          Sunset: <ConvertTime time={data.sys.sunset * 1000} newFormat='HH:mm' />
-        </div>
+        <div>Sunrise: {convertTime(data.sys.sunrise * 1000, 'HH:mm')}</div>
+        <div>Sunset: {convertTime(data.sys.sunset * 1000, 'HH:mm')}</div>
       </small>
     </>
-  ) : (
-    <Loader />
   );
 };
 
