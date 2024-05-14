@@ -1,4 +1,6 @@
-import { convertTime, convertDegrees } from '../Convert';
+import { convertTime } from '../Convert';
+import AddUnitSymbol from '../AddUnitSymbol';
+import WindUnit from '../WindUnit';
 
 const WeatherDetails = ({ data }) => {
   const {
@@ -13,10 +15,10 @@ const WeatherDetails = ({ data }) => {
   return (
     <div className="mt-4 md:flex md:flex-wrap font-semibold">
       <div className="sm:w-1/2 md:w-1/3 md:px-2 mb-2 md:mb-4">
-        <strong>Min</strong>: {convertDegrees(temp_min)}&deg;C
+        <strong>Min</strong>: <AddUnitSymbol unit={temp_min} />
       </div>
       <div className="sm:w-1/2 md:w-1/3 md:px-2 mb-2 md:mb-4">
-        <strong>Max</strong>: {convertDegrees(temp_max)}&deg;C
+        <strong>Max</strong>: <AddUnitSymbol unit={temp_max} />
       </div>
       <div className="sm:w-1/2 md:w-1/3 md:px-2 mb-2 md:mb-4">
         <strong>Clouds</strong>: {clouds.all} %
@@ -38,7 +40,7 @@ const WeatherDetails = ({ data }) => {
         <strong>Pressure</strong>: {pressure}hPa
       </div>
       <div className="sm:w-1/2 md:w-1/3 md:px-2 mb-2 md:mb-4">
-        <strong>Wind Speed</strong>: {wind.speed}m/s
+        <strong>Wind Speed</strong>: <WindUnit unit={wind.speed} />
       </div>
       <div className="sm:w-1/2 md:w-1/3 md:px-2 mb-2 md:mb-4">
         <strong>Sunrise</strong>: {convertTime(sunrise * 1000, 'HH:mm')}

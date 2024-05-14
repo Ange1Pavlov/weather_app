@@ -1,4 +1,5 @@
-import { convertDegrees, convertDistance, capitalizeText } from '../Convert';
+import { convertDistance, capitalizeText } from '../Convert';
+import AddUnitSymbol from '../AddUnitSymbol';
 import Image from 'next/image';
 
 const WeatherBody = ({ data }) => {
@@ -15,12 +16,14 @@ const WeatherBody = ({ data }) => {
           src={`https://openweathermap.org/img/wn/${icon}@4x.png`}
           width={100}
           height={100}
-          alt={description}
+          alt={capitalizeText(description)}
         />
       </div>
-      <h2 className="text-5xl font-bold mt-4">{convertDegrees(temp)}&deg;C</h2>
+      <h2 className="text-5xl font-bold mt-4">
+        <AddUnitSymbol unit={temp} />
+      </h2>
       <h3 className="text-lg font-semibold">
-        Feels like {convertDegrees(feels_like)}&deg;C.{' '}
+        Feels like <AddUnitSymbol unit={feels_like} />{' '}
         {capitalizeText(description)}. Visibility: ~{' '}
         {convertDistance(visibility)}
       </h3>

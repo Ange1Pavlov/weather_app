@@ -1,5 +1,6 @@
 import { useGlobalState } from '../GlobalStateContext';
-import { convertTime, convertDegrees } from '../Convert';
+import { convertTime } from '../Convert';
+import AddUnitSymbol from '../AddUnitSymbol';
 import Image from 'next/image';
 import Loader from '../Loader';
 
@@ -26,7 +27,7 @@ const AllDayForecast = ({ extend, date }) => {
                 {convertTime(item.dt * 1000, 'HH:mm')}
               </div>
               <div className="text-sm font-bold py-2">
-                {convertDegrees(item.main.temp)}&deg;C
+                <AddUnitSymbol unit={item.main.temp} />
               </div>
               {item.weather[0].icon && (
                 <div className="flex justify-center">

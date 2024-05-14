@@ -1,4 +1,5 @@
-import { convertTime, convertDegrees } from '../Convert';
+import { convertTime, capitalizeText } from '../Convert';
+import AddUnitSymbol from '../AddUnitSymbol';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -31,16 +32,15 @@ const ForecastByDate = ({ data }) => {
                   }`}
                 >
                   <div className="flex flex-col items-center">
-                    <div className="mr-2">
-                      {currentDate === getDate ? (
-                        <strong>Today</strong>
-                      ) : (
-                        <>{convertTime(item.dt * 1000, 'dd')}</>
-                      )}
-                      <br />
-                      <span className="text-gray-600">
-                        ~{convertDegrees(item.main.temp)}&deg;C
-                      </span>
+                    <div className="mr-2 text-center">
+                      <strong>
+                        {currentDate === getDate
+                          ? 'Today'
+                          : convertTime(item.dt * 1000, 'dd')}
+                      </strong>
+                      <div>
+                        ~<AddUnitSymbol unit={item.main.temp} />
+                      </div>
                     </div>
                     {item.weather && item.weather[0] && (
                       <div>
@@ -48,10 +48,10 @@ const ForecastByDate = ({ data }) => {
                           src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@4x.png`}
                           width={30}
                           height={30}
-                          alt={item.weather[0].description}
+                          alt={capitalizeText(item.weather[0].description)}
                         />
-                        <p className="text-xs mt-1">
-                          {item.weather[0].description}
+                        <p className="text-sm mt-1">
+                          {capitalizeText(item.weather[0].description)}
                         </p>
                       </div>
                     )}
