@@ -7,6 +7,8 @@ API URI FOR 5 DAYS: https://api.openweathermap.org/data/2.5/forecast?lat=42.6977
 
 First, run the development server:
 
+To run tests type npm run test
+
 ```bash
 npm run dev
 # or

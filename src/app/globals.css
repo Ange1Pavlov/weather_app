@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-}
-
 .disabled {
   pointer-events: none;
+}
+
+form {
+  margin: 0 !important;
 }

@@ -8,6 +8,7 @@ import Loader from '@/components/Loader';
 const DailyForecast = ({ params }) => {
   const { forecastData } = useGlobalState();
   const date = convertTime(params.id * 1000, 'dd');
+  console.log(forecastData);
 
   if (!forecastData) {
     return <Loader />;
@@ -17,7 +18,10 @@ const DailyForecast = ({ params }) => {
     <main>
       <MainCard>
         <h1 className="text-2xl font-bold p-5 text-center">
-          <strong>{convertTime(params.id * 1000, 'dd MMMM yyyy')}</strong>
+          <strong>
+            The weather in {forecastData.city.name},{' '}
+            {convertTime(params.id * 1000, 'dd MMMM yyyy')}
+          </strong>
         </h1>
         <AllDayForecast data={forecastData} date={date} extend />
       </MainCard>

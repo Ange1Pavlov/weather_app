@@ -1,5 +1,5 @@
 import { useGlobalState } from '../GlobalStateContext';
-import { convertTime } from '../Convert';
+import { convertTime, capitalizeText } from '../Convert';
 import AddUnitSymbol from '../AddUnitSymbol';
 import Image from 'next/image';
 import Loader from '../Loader';
@@ -16,7 +16,8 @@ const AllDayForecast = ({ extend, date }) => {
   return (
     <>
       <h2 className="font-bold text-xl text-center p-2">
-        The weather for {date ? date : 'today'} is the following
+        The weather for <strong>{date ? date : 'today'}</strong> is the
+        following
       </h2>
       <ul className="flex flex-wrap md:flex-nowrap text-white bg-gray-900">
         {forecastData.list
@@ -35,11 +36,11 @@ const AllDayForecast = ({ extend, date }) => {
                     src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@4x.png`}
                     width={45}
                     height={45}
-                    alt={item.weather[0].description}
+                    alt={capitalizeText(item.weather[0].description)}
                   />
                 </div>
               )}
-              {extend && <p>{item.weather[0].description}</p>}
+              {extend && <p>{capitalizeText(item.weather[0].description)}</p>}
             </li>
           ))}
       </ul>

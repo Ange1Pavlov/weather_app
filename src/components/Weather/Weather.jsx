@@ -7,7 +7,6 @@ import AllDayForecast from '../Forecast/AllDayForecast';
 import MainCard from '../MainCard';
 import Loader from '../Loader';
 import MetricSytemButtons from '../MetricSytemButtons';
-import LocationFrom from '../LocationFrom';
 
 const Weather = () => {
   const { weatherData } = useGlobalState();
@@ -18,7 +17,7 @@ const Weather = () => {
 
   return (
     <>
-      <LocationFrom />
+
       <MainCard>
         <div className="p-5">
           <WeatherHeader

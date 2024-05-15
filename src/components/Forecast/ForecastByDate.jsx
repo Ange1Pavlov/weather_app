@@ -43,7 +43,7 @@ const ForecastByDate = ({ data }) => {
                       </div>
                     </div>
                     {item.weather && item.weather[0] && (
-                      <div>
+                      <div className="flex flex-col items-center">
                         <Image
                           src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@4x.png`}
                           width={30}
