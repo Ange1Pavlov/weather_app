@@ -5,12 +5,18 @@ import { fetchWeather, fetchForecast } from '@/app/api/weather';
 const GlobalStateContext = createContext();
 
 export const GlobalStateProvider = ({ children }) => {
-  const defaultLocation = localStorage.getItem('location') || 'sofia';
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
-  const [metricSystem, setMetricSystem] = useState(
-    () => localStorage.getItem('metricSystem') || 'metric'
-  );
+  const [metricSystem, setMetricSystem] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('metricSystem') || 'metric';
+    }
+  });
+  const [defaultLocation, setDefaultLocation] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('location') || 'sofia';
+    }
+  });
 
   const fetchData = async (location) => {
     try {
@@ -38,6 +44,7 @@ export const GlobalStateProvider = ({ children }) => {
 
   const updateLocation = (location) => {
     localStorage.setItem('location', location);
+    setDefaultLocation(location);
     fetchData(location);
   };
 

@@ -23,7 +23,7 @@ const AllDayForecast = ({ extend, date }) => {
         {forecastData.list
           .filter((item) => convertTime(item.dt * 1000, 'dd') === currentDate)
           .map((item) => (
-            <li key={item.dt} className="p-4 w-1/2 md:w-full text-center">
+            <li key={item.dt} className="p-2 w-1/2 md:w-full text-center">
               <div className="text-md font-600">
                 {convertTime(item.dt * 1000, 'HH:mm')}
               </div>

@@ -6,14 +6,12 @@ import Loader from '../Loader';
 const Forecast = () => {
   const { forecastData } = useGlobalState();
 
-  if (!forecastData) {
-    return <Loader />;
-  }
-
   return (
-    <div className="container">
-      <ForecastByDate data={forecastData} />
-    </div>
+    forecastData && (
+      <div className="container">
+        <ForecastByDate data={forecastData} />
+      </div>
+    )
   );
 };
 
