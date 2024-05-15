@@ -7,6 +7,8 @@ const LocationFrom = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //WIP: Validations should be added
+
     updateLocation(location);
   };
 
