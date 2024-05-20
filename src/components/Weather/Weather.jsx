@@ -17,13 +17,13 @@ const Weather = () => {
 
   return (
     <>
-      <MainCard>
+      <MainCard showHeader>
         <div className='p-5'>
           <WeatherHeader
             name={weatherData.name}
             country={weatherData.sys.country}
           />
-          <WeatherBody data={weatherData} />
+          <WeatherBody data={weatherData} showDesc showIcon iconSize={100} />
           <MetricSytemButtons />
           <WeatherDetails data={weatherData} />
         </div>

@@ -1,4 +1,6 @@
 /** @type { import('@storybook/react').Preview } */
+import '../src/dist/tailwind.css';
+
 const preview = {
   parameters: {
     controls: {

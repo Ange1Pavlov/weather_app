@@ -17,7 +17,7 @@ const LocationFrom = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex items-center justify-center mb-5 w-full'
+      className='flex items-center justify-center mb-5 w-full px-2 md:px-0'
     >
       <Input
         type='text'

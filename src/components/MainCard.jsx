@@ -1,8 +1,15 @@
 import Header from './Header';
-const MainCard = ({ children }) => {
+import LocationFrom from './LocationFrom';
+
+const MainCard = ({ showHeader, children }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-      <Header />
+    <div className='bg-white rounded-lg shadow-lg overflow-hidden'>
+      {showHeader && (
+        <Header>
+          <LocationFrom />{' '}
+        </Header>
+      )}
+
       {children}
     </div>
   );

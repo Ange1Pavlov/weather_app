@@ -15,7 +15,7 @@ const DailyForecast = ({ params }) => {
 
   return (
     <main>
-      <MainCard>
+      <MainCard showHeader>
         <h1 className='text-2xl font-bold p-5 text-center'>
           <strong>
             The weather in {forecastData.city.name},{' '}

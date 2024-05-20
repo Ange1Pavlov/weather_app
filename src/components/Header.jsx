@@ -1,20 +1,15 @@
-import Link from 'next/link';
-import LocationFrom from './LocationFrom';
+import NavLink from './NavLink';
 
-const Header = () => {
+const Header = ({
+  pageLabel = 'Home',
+  backgroundColor = 'bg-gray-700',
+  children,
+}) => {
   return (
-    <header className="bg-gray-700 py-4">
-      <div className="container mx-auto flex justify-between items-center px-4">
-        <Link
-          href="/"
-          className="text-white hover:text-gray-300 text-xl font-bold"
-        >
-          Home
-        </Link>
-
-        <div className="flex items-center">
-          <LocationFrom />
-        </div>
+    <header className={`${backgroundColor} py-4`}>
+      <div className='container mx-auto flex flex-col md:flex-row justify-between items-center px-4'>
+        <NavLink href='/' label={pageLabel} />
+        {children && <div className='flex items-center'>{children}</div>}
       </div>
     </header>
   );

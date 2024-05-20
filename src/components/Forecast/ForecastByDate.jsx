@@ -12,8 +12,8 @@ const ForecastByDate = ({ data }) => {
   }
 
   return (
-    <div className="flex items-center md:pb-5 w-full py-2 md:py-5">
-      <ul className="flex md:justify-between flex-wrap w-full">
+    <div className='flex items-center md:pb-5 w-full py-2 md:py-5'>
+      <ul className='flex md:justify-between flex-wrap w-full'>
         {data.list
           .filter((item) => convertTime(item.dt * 1000, 'HH') === '15')
           .map((item) => {
@@ -21,7 +21,7 @@ const ForecastByDate = ({ data }) => {
             return (
               <li
                 key={item.dt}
-                className="w-full md:w-auto mb-4 md:mb-0 md:flex-grow-0 min-w-32 p-2 md:p-0"
+                className='w-full md:w-auto mb-4 md:mb-0 md:flex-grow-0 min-w-32 p-2 md:p-0'
               >
                 <Link
                   href={`/forecast/${item.dt}`}
@@ -31,9 +31,9 @@ const ForecastByDate = ({ data }) => {
                       : 'hover:bg-gray-100'
                   }`}
                 >
-                  <div className="flex flex-col items-center">
-                    <div className="mr-2 text-center">
-                      <strong>
+                  <div className='flex md:flex-col items-center justify-between md:justify-normal w-full px-5 md:px-0'>
+                    <div className='mr-2 text-center'>
+                      <strong className='text-4xl md:text-base font-extrabold md:font-bold'>
                         {currentDate === getDate
                           ? 'Today'
                           : convertTime(item.dt * 1000, 'dd')}
@@ -43,17 +43,19 @@ const ForecastByDate = ({ data }) => {
                       </div>
                     </div>
                     {item.weather && item.weather[0] && (
-                      <div className="flex flex-col items-center">
-                        <Image
-                          src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@4x.png`}
-                          width={30}
-                          height={30}
-                          alt={capitalizeText(item.weather[0].description)}
-                        />
-                        <p className="text-sm mt-1">
+                      <>
+                        <p className='md:text-sm mt-1 text-center'>
                           {capitalizeText(item.weather[0].description)}
                         </p>
-                      </div>
+                        <div className='flex flex-col items-center w-24 h-24 md:h-12 md:w-8 min-h-32 md:min-h-0'>
+                          <Image
+                            src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@4x.png`}
+                            width={100}
+                            height={100}
+                            alt={capitalizeText(item.weather[0].description)}
+                          />
+                        </div>
+                      </>
                     )}
                   </div>
                 </Link>
