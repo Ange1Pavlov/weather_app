@@ -18,7 +18,7 @@ export const fetchWeather = async (location, units) => {
       data: res.data,
       error: null,
     };
-    return { data: weatherData, error: null };
+    //return { data: weatherData, error: null };
   } catch (err) {
     console.log(err, 'fetchWeather err');
     if (err.response && err.response.status === 404) {
