@@ -7,6 +7,7 @@ const GlobalStateContext = createContext();
 export const GlobalStateProvider = ({ children }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [metricSystem, setMetricSystem] = useState(() => {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('metricSystem') || 'metric';
@@ -21,12 +22,24 @@ export const GlobalStateProvider = ({ children }) => {
   const fetchData = async (location) => {
     try {
       const currentWeather = await fetchWeather(location, metricSystem);
-      setWeatherData(currentWeather);
+      //console.log(currentWeather, 'currentWeather');
 
-      const currentForecast = await fetchForecast(location, metricSystem);
-      setForecastData(currentForecast);
+      if (currentWeather.error) {
+        setErrorMessage(currentWeather.error);
+        setWeatherData(null);
+        setForecastData(null);
+      } else {
+        setErrorMessage(null);
+        setWeatherData(currentWeather.data);
+
+        const currentForecast = await fetchForecast(location, metricSystem);
+        setForecastData(currentForecast.data);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
+      setErrorMessage('An error occurred while fetching the weather data');
+      setWeatherData(null);
+      setForecastData(null);
     }
   };
 
@@ -54,6 +67,7 @@ export const GlobalStateProvider = ({ children }) => {
         weatherData,
         forecastData,
         metricSystem,
+        errorMessage,
         updateMetricSystem,
         updateLocation,
       }}

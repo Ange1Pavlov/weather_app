@@ -1,7 +1,7 @@
-
 ## Getting Started
 
 First run:
+
 ```bash
 npm install
 ```
@@ -13,12 +13,21 @@ NEXT_PUBLIC_WEATHER_API_KEY=fc151e957b21da1a5746a3e36303b51a
 ```
 
 And run the development server:
+
 ```bash
 npm run dev
 ```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+To run Storybook:
+
+```bash
+npm run storybook
+```
+
 For running tests:
+
 ```bash
 npm run test
 ```

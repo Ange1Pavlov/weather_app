@@ -7,19 +7,18 @@ import AllDayForecast from '../Forecast/AllDayForecast';
 import MainCard from '../MainCard';
 import Loader from '../Loader';
 import MetricSytemButtons from '../MetricSytemButtons';
+import ErrorMessage from '../ErrorMessage';
 
 const Weather = () => {
-  const { weatherData } = useGlobalState();
+  const { weatherData, errorMessage } = useGlobalState();
 
-  if (!weatherData) {
-    return <Loader />;
-  }
+  if (errorMessage) return <ErrorMessage errorMessage={errorMessage} />;
+  if (!weatherData) return <Loader />;
 
   return (
     <>
-
       <MainCard>
-        <div className="p-5">
+        <div className='p-5'>
           <WeatherHeader
             name={weatherData.name}
             country={weatherData.sys.country}

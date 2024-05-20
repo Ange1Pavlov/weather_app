@@ -14,11 +14,26 @@ export const fetchWeather = async (location, units) => {
         },
       }
     );
-    return res.data;
+    return {
+      data: res.data,
+      error: null,
+    };
     // return weatherData;
   } catch (err) {
-    console.log(err);
-    return null;
+    console.log(err, 'fetchWeather err');
+    if (err.response && err.response.status === 404) {
+      return {
+        data: null,
+        error:
+          'This location does not exist in our database, please try another one!',
+      };
+    } else {
+      console.log(err);
+      return {
+        data: null,
+        error: `${err.response.status} - error occurred, please contact support.`,
+      };
+    }
   }
 };
 
@@ -34,10 +49,16 @@ export const fetchForecast = async (location, units) => {
         },
       }
     );
-    return res.data;
+    return {
+      data: res.data,
+      error: null,
+    };
     // return forecastData;
   } catch (err) {
-    console.log(err);
-    return null;
+    console.log(err, 'fetchForecast err');
+    return {
+      data: null,
+      error: `${err.response.status} - error occurred, please contact support.`,
+    };
   }
 };
