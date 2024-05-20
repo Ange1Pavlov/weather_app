@@ -1,7 +1,8 @@
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { GlobalStateProvider } from '@/components/GlobalStateContext';
 import WeatherBody from '@/components/Weather/WeatherBody';
 import weatherData from '@/data/weather.json';
 import MainCard from '@/components/MainCard';
-import { GlobalStateProvider } from '@/components/GlobalStateContext';
 
 export default {
   title: 'Components/Weather/Body',
@@ -45,12 +46,18 @@ export const WithIcon = {
 
 export const WithCustomURL = {
   args: {
-    showIcon: true,
+    ...WithIcon.args,
     customURL:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Weather_icon_-_full_moon.svg/512px-Weather_icon_-_full_moon.svg.png',
-    iconBackground: 'bg-gray-600',
-    showDesc: true,
-    iconSize: 120,
     iconBgColor: 'bg-white/0',
+  },
+};
+
+export const Mobile = {
+  args: WithIcon.args,
+  parameters: {
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+    },
   },
 };

@@ -19,32 +19,33 @@ const AllDayForecast = ({ extend, date }) => {
         The weather for <strong>{date ? date : 'today'}</strong> is the
         following
       </h2>
-      <ul className='flex flex-wrap md:flex-nowrap text-white bg-gray-900'>
+      <ul className='flex flex-wrap md:flex-nowrap text-white bg-gray-900  p-5 md:p-2'>
         {forecastData.list
-          .filter((item) => convertTime(item.dt * 1000, 'dd') === currentDate)
-          .map((item) => {
-            return (
-              <li key={item.dt} className='p-2 w-1/2 md:w-full text-center'>
-                <div className='text-md font-600'>
-                  {convertTime(item.dt * 1000, 'HH:mm')}
+          .filter((item) => {
+            const newTime = convertTime(item.dt_txt, 'dd');
+            return newTime === currentDate;
+          })
+          .map((item) => (
+            <li key={item.dt} className='w-1/2 md:w-full text-center'>
+              <div className='text-xl md:text-md font-600'>
+                {convertTime(item.dt * 1000, 'HH:mm')}
+              </div>
+              <div className='text-lg md:text-md font-black py-2'>
+                <AddUnitSymbol unit={item.main.temp} />
+              </div>
+              {item.weather[0].icon && (
+                <div className='flex flex-col items-center justify-center w-24 h-24 md:h-12 md:w-8 min-h-32 md:min-h-0 mx-auto'>
+                  <Image
+                    src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@4x.png`}
+                    width={100}
+                    height={100}
+                    alt={capitalizeText(item.weather[0].description)}
+                  />
                 </div>
-                <div className='text-sm font-bold py-2'>
-                  <AddUnitSymbol unit={item.main.temp} />
-                </div>
-                {item.weather[0].icon && (
-                  <div className='flex justify-center'>
-                    <Image
-                      src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@4x.png`}
-                      width={45}
-                      height={45}
-                      alt={capitalizeText(item.weather[0].description)}
-                    />
-                  </div>
-                )}
-                {extend && <p>{capitalizeText(item.weather[0].description)}</p>}
-              </li>
-            );
-          })}
+              )}
+              {extend && <p>{capitalizeText(item.weather[0].description)}</p>}
+            </li>
+          ))}
       </ul>
     </>
   );

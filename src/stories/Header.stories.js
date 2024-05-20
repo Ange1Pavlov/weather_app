@@ -1,6 +1,7 @@
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { GlobalStateProvider } from '@/components/GlobalStateContext';
 import Header from '@/components/Header';
 import LocationFrom from '@/components/LocationFrom';
-import { GlobalStateProvider } from '@/components/GlobalStateContext';
 import MainCard from '@/components/MainCard';
 import NavLink from '@/components/NavLink';
 
@@ -44,5 +45,14 @@ export const Simple = {
         <NavLink href='/contact' label='Contact Us' />
       </div>
     ),
+  },
+};
+
+export const Mobile = {
+  args: Home.args,
+  parameters: {
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+    },
   },
 };

@@ -20,6 +20,7 @@ const Weather = () => {
       <MainCard showHeader>
         <div className='p-5'>
           <WeatherHeader
+            showTime
             name={weatherData.name}
             country={weatherData.sys.country}
           />
