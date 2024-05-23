@@ -2,13 +2,15 @@ import axios from 'axios';
 import weatherData from '@/data/weather.json';
 import forecastData from '@/data/forecast.json';
 
-export const fetchWeather = async (location, units) => {
+export const fetchWeather = async (location, lat, long, units) => {
   try {
     const res = await axios.get(
       'https://api.openweathermap.org/data/2.5/weather',
       {
         params: {
           q: location,
+          lat: lat,
+          lon: long,
           units: units,
           appid: process.env.NEXT_PUBLIC_WEATHER_API_KEY,
         },

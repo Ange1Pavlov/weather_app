@@ -15,14 +15,21 @@ export const GlobalStateProvider = ({ children }) => {
   });
   const [defaultLocation, setDefaultLocation] = useState(() => {
     if (typeof localStorage !== 'undefined') {
-      return localStorage.getItem('location') || 'sofia';
+      return localStorage.getItem('location') || '';
     }
   });
 
+  const [lat, setLat] = useState(null);
+  const [long, setLong] = useState(null);
+
   const fetchData = async (location) => {
     try {
-      const currentWeather = await fetchWeather(location, metricSystem);
-      //console.log(currentWeather, 'currentWeather');
+      const currentWeather = await fetchWeather(
+        location,
+        lat,
+        long,
+        metricSystem
+      );
 
       if (currentWeather.error) {
         setErrorMessage(currentWeather.error);
@@ -48,8 +55,15 @@ export const GlobalStateProvider = ({ children }) => {
   }, [metricSystem]);
 
   useEffect(() => {
-    fetchData(defaultLocation);
-  }, [metricSystem]);
+    window.navigator.geolocation.getCurrentPosition((position) => {
+      setLat(position.coords.latitude);
+      setLong(position.coords.longitude);
+    });
+
+    if (lat && long) {
+      fetchData(defaultLocation);
+    }
+  }, [metricSystem, lat, long]);
 
   const updateMetricSystem = (newMetricSystem) => {
     setMetricSystem(newMetricSystem);
